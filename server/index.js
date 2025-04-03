@@ -165,30 +165,42 @@ app.get('/queue', (req, res) => {
     });
 });
 
-// ตัวอย่างในกรณีที่เกิดข้อผิดพลาดในการสร้างคำสั่งซื้อ
 app.post('/api/createOrder', (req, res) => {
+    console.log('Received order data:', JSON.stringify(req.body, null, 2));
     const { items, totalPrice } = req.body;
-    const userId = 1; // ควรใช้ข้อมูลผู้ใช้ที่ล็อกอินอยู่
+    const userId = 1; // ควรดึง user_id จาก session หรือ token
+
+    if (!items || !Array.isArray(items) || items.length === 0) {
+        return res.status(400).json({ error: 'Invalid items data' });
+    }
+
+    if (typeof totalPrice !== 'number' || totalPrice <= 0) {
+        return res.status(400).json({ error: 'Invalid total price' });
+    }
 
     const sql = `INSERT INTO orders (user_id, total_price, status, payment_status) VALUES (?, ?, 'รอคิว', 'รอการชำระ')`;
     db.query(sql, [userId, totalPrice], (err, result) => {
         if (err) {
-            // ส่งข้อผิดพลาดในรูปแบบ JSON
-            return res.status(500).json({ error: 'Error creating order', details: err });
+            console.error('Error creating order:', err);
+            return res.status(500).json({ error: 'Error creating order', details: err.message || 'Database error' });
         }
 
         const orderId = result.insertId;
 
-        // ดำเนินการต่อในการเพิ่มรายการสินค้า
-        const orderItems = items.map(item => [
-            orderId, item.menuItemId, item.quantity, item.price
-        ]);
+        const orderItems = items.map(item => {
+            if (!item.menu_item_id || !item.quantity || !item.price) {
+                return res.status(400).json({ error: 'Missing required fields in items' });
+            }
+            return [
+                orderId, item.menu_item_id, item.quantity, item.price
+            ];
+        });
 
         const itemSql = `INSERT INTO order_items (order_id, menu_item_id, quantity, price) VALUES ?`;
         db.query(itemSql, [orderItems], (err) => {
             if (err) {
-                // ส่งข้อผิดพลาดในรูปแบบ JSON
-                return res.status(500).json({ error: 'Error inserting order items', details: err });
+                console.error('Error inserting order items:', err);
+                return res.status(500).json({ error: 'Error inserting order items', details: err.message || 'Database error' });
             }
 
             res.status(200).json({ success: true, orderId });
@@ -197,21 +209,20 @@ app.post('/api/createOrder', (req, res) => {
 });
 
 
-// เพิ่ม API สำหรับดึงข้อมูลคำสั่งซื้อและรายการสินค้า
 app.get('/api/order/:orderId', (req, res) => {
     const { orderId } = req.params;
 
     const orderSql = 'SELECT * FROM orders WHERE id = ?';
     db.query(orderSql, [orderId], (err, orderResult) => {
         if (err || orderResult.length === 0) {
-            return res.status(404).send('ไม่พบคำสั่งซื้อ');
+            return res.status(404).json({ error: 'Order not found' });
         }
 
-        // ดึงรายการสินค้าจากตาราง order_items
         const orderItemsSql = 'SELECT oi.quantity, oi.price, mi.name FROM order_items oi JOIN menu_items mi ON oi.menu_item_id = mi.id WHERE oi.order_id = ?';
         db.query(orderItemsSql, [orderId], (err, itemsResult) => {
             if (err) {
-                return res.status(500).send('Error retrieving order items');
+                console.error('Error retrieving order items:', err);
+                return res.status(500).json({ error: 'Error retrieving order items', details: err.message || 'Database error' });
             }
             const order = {
                 ...orderResult[0],

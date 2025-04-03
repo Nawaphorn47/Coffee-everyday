@@ -80,6 +80,7 @@ function removeFromOrder(index) {
     updateOrderDisplay();
 }
 
+
 // เพิ่มฟังก์ชันสำหรับอัพเดทการแสดงรายการสั่งซื้อ
 function updateOrderDisplay() {
     const tbody = document.querySelector('#orderList tbody');
@@ -123,17 +124,19 @@ document.getElementById("checkoutBtn").addEventListener("click", async function 
 
     try {
         // สร้างข้อมูลคำสั่งซื้อในรูปแบบที่เหมาะสมกับ API
-        const orderItems = order.map(item => ({
-            menuItemId: item.id,
-            quantity: item.quantity,
-            price: item.price
-        }));
+        // แก้ไขที่นี่
+const orderItems = order.map(item => ({
+    menu_item_id: item.id,
+    quantity: item.quantity,
+    price: item.price
+}));
 
-        const orderData = {
-            items: orderItems,
-            totalPrice: parseFloat(document.getElementById("totalAmount").textContent)
-        };
+const orderData = {
+    items: orderItems,
+    totalPrice: parseFloat(document.getElementById("totalAmount").textContent)
+};
 
+console.log('Sending order data:', JSON.stringify(orderData, null, 2));
         const response = await fetch("/api/createOrder", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -157,4 +160,3 @@ document.getElementById("checkoutBtn").addEventListener("click", async function 
         alert("เกิดข้อผิดพลาด: " + error.message);
     }
 });
-
