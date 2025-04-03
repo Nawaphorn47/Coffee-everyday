@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หน้าหลัก - Coffee Everyday</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+          <img src="/images/profile1.webp" alt="Coffee Everyday Logo">
+          <h1>หน้าหลัก - Coffee Everyday</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/html/home.html"><i class="fas fa-home"></i> หน้าหลัก</a></li>
+            <li><a href="/html/sell.html"><i class="fas fa-cash-register"></i> ขายสินค้า</a></li>
+            <li><a href="/html/order_history.html"><i class="fas fa-history"></i> ประวัติการขาย</a></li>
+            <li><a href="/html/reports.html"><i class="fas fa-chart-line"></i> รายงานสรุปรายได้</a></li>
+            <li><a href="/html/login.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></li>
+          </ul>
+        </nav>
+      </header>
+
+  <main>
+    <section class="welcome">
+      <h2>ยินดีต้อนรับสู่ระบบ Coffee Everyday</h2>
+      <p>ระบบการจัดการร้านกาแฟที่จะทำให้การบริหารร้านของคุณง่ายขึ้น เร็วขึ้น และมีประสิทธิภาพมากยิ่งขึ้น</p>
+    </section>
+
+    <section class="services">
+      <div class="service-card">
+        <h3>ขายหน้าร้าน</h3>
+        <p>จัดการการขายแบบ Point of Sale ที่รวดเร็วและง่ายต่อการใช้งาน</p>
+        <a href="/html/sell.html">เริ่มต้นขาย</a>
+      </div>
+      <div class="service-card">
+        <h3>ประวัติการขาย</h3>
+        <p>ตรวจสอบประวัติการขายย้อนหลังและสรุปรายได้รายวัน รายสัปดาห์ และรายเดือน</p>
+        <a href="/html/order_history.html">ดูประวัติ</a>
+      </div>
+      <div class="service-card">
+        <h3>รายงานสรุปรายได้</h3>
+        <p>ดูรายงานสรุปรายได้และการขายในรูปแบบกราฟและตาราง</p>
+        <a href="/html/reports.html">ดูรายงาน</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Coffee Everyday | All Rights Reserved</p>
+  </footer>
+
+  <script src="/js/home.js"></script>
+</body>
+</html>

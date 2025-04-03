@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายงานสรุปรายได้ - Coffee Everyday</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/reports.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/images/profile1.webp" alt="Coffee Everyday Logo">
+      <h1>รายงานสรุปรายได้ - Coffee Everyday</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/html/home.html"><i class="fas fa-home"></i> หน้าหลัก</a></li>
+        <li><a href="/html/sell.html"><i class="fas fa-cash-register"></i> ขายสินค้า</a></li>
+        <li><a href="/html/order_history.html"><i class="fas fa-history"></i> ประวัติการขาย</a></li>
+        <li><a href="/html/reports.html"><i class="fas fa-chart-line"></i> รายงานสรุปรายได้</a></li>
+        <li><a href="/html/login.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="dashboard">
+      <div class="summary-cards">
+        <div class="card">
+          <h3>รายได้วันนี้</h3>
+          <div class="amount" id="today-income">0.00 บาท</div>
+          <div class="change positive"><i class="fas fa-arrow-up"></i> <span id="today-percent">0.0</span>% จากเมื่อวาน</div>
+        </div>
+        <div class="card">
+          <h3>รายได้สัปดาห์นี้</h3>
+          <div class="amount" id="week-income">0.00 บาท</div>
+          <div class="change positive"><i class="fas fa-arrow-up"></i> <span id="week-percent">0.0</span>% จากสัปดาห์ที่แล้ว</div>
+        </div>
+        <div class="card">
+          <h3>รายได้เดือนนี้</h3>
+          <div class="amount" id="month-income">0.00 บาท</div>
+          <div class="change" id="month-change"><i class="fas fa-arrow-right"></i> <span id="month-percent">0.0</span>% จากเดือนที่แล้ว</div>
+        </div>
+        <div class="card">
+          <h3>ยอดขายทั้งหมด</h3>
+          <div class="amount" id="total-income">0.00 บาท</div>
+          <div class="orders" id="total-orders">0 ออเดอร์</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="report-filters">
+      <div class="filter-container">
+        <div class="filter-group">
+          <label for="report-type">ประเภทรายงาน:</label>
+          <select id="report-type">
+            <option value="daily">รายวัน</option>
+            <option value="monthly">รายเดือน</option>
+            <option value="yearly">รายปี</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="date-range">ช่วงเวลา:</label>
+          <select id="date-range">
+            <option value="current">ปัจจุบัน</option>
+            <option value="last-7">7 วันที่ผ่านมา</option>
+            <option value="last-30">30 วันที่ผ่านมา</option>
+            <option value="custom">กำหนดเอง</option>
+          </select>
+        </div>
+        
+        <div class="date-inputs" id="custom-dates">
+          <div class="filter-group">
+            <label for="start-date">วันที่เริ่มต้น:</label>
+            <input type="date" id="start-date">
+          </div>
+          <div class="filter-group">
+            <label for="end-date">วันที่สิ้นสุด:</label>
+            <input type="date" id="end-date">
+          </div>
+        </div>
+        
+        <button id="generate-report" class="btn-primary">
+          <i class="fas fa-chart-bar"></i> สร้างรายงาน
+        </button>
+      </div>
+    </section>
+
+    <section class="charts">
+      <div class="chart-container">
+        <h3>กราฟแสดงรายได้</h3>
+        <canvas id="income-chart"></canvas>
+      </div>
+      
+      <div class="chart-container">
+        <h3>สินค้าขายดี</h3>
+        <canvas id="top-products-chart"></canvas>
+      </div>
+    </section>
+
+    <section class="data-table">
+      <h3>ข้อมูลรายได้ตามช่วงเวลา</h3>
+      <div class="table-container">
+        <table id="income-table">
+          <thead>
+            <tr>
+              <th>วันที่</th>
+              <th>จำนวนออเดอร์</th>
+              <th>รายได้รวม</th>
+              <th>รายได้เฉลี่ยต่อออเดอร์</th>
+              <th>เทียบกับช่วงก่อนหน้า</th>
+            </tr>
+          </thead>
+          <tbody id="income-data">
+            <!-- ข้อมูลจะถูกเพิ่มด้วย JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="export-buttons">
+        <button id="export-excel" class="btn-secondary">
+          <i class="fas fa-file-excel"></i> ส่งออก Excel
+        </button>
+        <button id="export-pdf" class="btn-secondary">
+          <i class="fas fa-file-pdf"></i> ส่งออก PDF
+        </button>
+        <button id="print-report" class="btn-secondary">
+          <i class="fas fa-print"></i> พิมพ์รายงาน
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Coffee Everyday | All Rights Reserved</p>
+  </footer>
+
+  <script src="/js/reports.js"></script>
+</body>
+</html>

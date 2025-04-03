@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สมัครสมาชิก - Coffee Everyday</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/images/profile1.webp" alt="Coffee Everyday Logo">
+      <h1>สมัครสมาชิก - Coffee Everyday</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="auth-container">
+      <div class="auth-header">
+        <h2>สมัครสมาชิก</h2>
+        <p>กรุณากรอกข้อมูลเพื่อสร้างบัญชีใหม่</p>
+      </div>
+
+      <form id="registerForm">
+        <div class="input-group">
+          <input type="text" id="firstName" placeholder="ชื่อ" required />
+        </div>
+        <div class="input-group">
+          <input type="text" id="lastName" placeholder="นามสกุล" required />
+        </div>
+        <div class="input-group">
+          <input type="text" id="username" placeholder="ชื่อผู้ใช้" required />
+        </div>
+        <div class="input-group">
+          <input type="email" id="email" placeholder="อีเมล" required />
+        </div>
+        <div class="input-group">
+          <input type="password" id="password" placeholder="รหัสผ่าน" required />
+        </div>
+        <div class="input-group">
+          <input type="password" id="confirmPassword" placeholder="ยืนยันรหัสผ่าน" required />
+        </div>
+        <p id="registerError" class="error"></p>
+        <button type="submit">สมัครสมาชิก</button>
+
+      </form>
+
+      <div class="auth-footer">
+        <p>มีบัญชีอยู่แล้ว? <a href="/html/login.html">เข้าสู่ระบบ</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Coffee Everyday | All Rights Reserved</p>
+  </footer>
+
+  <script src="/js/register.js"></script>
+</body>
+</html>

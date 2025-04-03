@@ -1,0 +1,219 @@
+/* ======= สไตล์เฉพาะสำหรับหน้ายืนยันการสั่งซื้อ ======= */
+
+.receipt-container {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* โลโก้ร้านค้า */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logo img {
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .logo h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  /* ส่วนหัวใบเสร็จ */
+  .receipt-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--primary-light);
+  }
+  
+  .shop-info h2 {
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .shop-info p {
+    color: var(--text-gray);
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .receipt-number h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .receipt-number p, .receipt-date p {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  /* ตารางสินค้า */
+  #orderDetails {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  #orderDetails th {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-weight: 500;
+    text-align: center;
+  }
+  
+  #orderDetails th.item-name, #orderDetails td.item-name {
+    text-align: left;
+  }
+  
+  #orderDetails th.item-number, #orderDetails td.item-number {
+    width: 50px;
+    text-align: center;
+  }
+  
+  #orderDetails th.item-price, #orderDetails td.item-price,
+  #orderDetails th.item-quantity, #orderDetails td.item-quantity,
+  #orderDetails th.item-total, #orderDetails td.item-total {
+    text-align: right;
+    width: 100px;
+  }
+  
+  .item-options {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    font-style: italic;
+  }
+  
+  /* ส่วนท้ายใบเสร็จ */
+  .receipt-footer {
+    border-top: 1px dashed var(--primary-light);
+    padding-top: 1.5rem;
+  }
+  
+  .summary {
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-bottom: 2rem;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  
+  .summary-row.total {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--primary-light);
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .payment-info {
+    text-align: right;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+  }
+  
+  .thank-you {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--primary-color);
+  }
+  
+  .thank-you p:first-child {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .thank-you p:last-child {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  /* ปุ่มดำเนินการ */
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  /* รองรับการพิมพ์ */
+  @media print {
+    body {
+      background-color: white;
+      font-size: 12pt;
+    }
+  
+    .receipt-container {
+      box-shadow: none;
+      padding: 0;
+      max-width: 100%;
+    }
+  
+    .action-buttons {
+      display: none;
+    }
+  
+    .receipt-header, .receipt-footer {
+      page-break-inside: avoid;
+    }
+  
+    #orderDetails th {
+      background-color: white !important;
+      color: black !important;
+      border-bottom: 1px solid #000;
+    }
+  
+    .thank-you {
+      margin-top: 3rem;
+    }
+  }
+  
+  /* รองรับอุปกรณ์มือถือ */
+  @media (max-width: 768px) {
+    .receipt-container {
+      padding: 1rem;
+    }
+  
+    .receipt-header {
+      flex-direction: column;
+    }
+  
+    .shop-info {
+      margin-bottom: 1rem;
+    }
+  
+    .receipt-details {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .receipt-number, .receipt-date {
+      margin-bottom: 0.5rem;
+    }
+  
+    #orderDetails th.item-price, #orderDetails td.item-price {
+      display: none;
+    }
+  
+    .summary {
+      max-width: 100%;
+    }
+  }

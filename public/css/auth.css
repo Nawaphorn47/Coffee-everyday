@@ -1,0 +1,90 @@
+/* === สไตล์พื้นฐานสำหรับหน้า login และ register === */
+.auth-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .auth-header h2 {
+    color: #5d4037;
+    margin-bottom: 0.5rem;
+  }
+  
+  .auth-header p {
+    color: #757575;
+  }
+  
+  /* สไตล์สำหรับฟอร์ม */
+  .input-group {
+    margin-bottom: 1rem;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Prompt', 'Kanit', sans-serif;
+  }
+  
+  .input-group input:focus {
+    outline: none;
+    border-color: #5d4037;
+  }
+  
+  /* สไตล์สำหรับปุ่ม */
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5d4037;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Prompt', 'Kanit', sans-serif;
+  }
+  
+  button:hover {
+    background-color: #8d6e63;
+  }
+  
+  /* สไตล์สำหรับข้อความแสดงข้อผิดพลาด */
+  .error {
+    color: #d32f2f;
+    margin-bottom: 1rem;
+    padding: 8px;
+    background-color: rgba(211, 47, 47, 0.1);
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  /* ส่วนล่างของฟอร์ม */
+  .auth-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+  
+  .auth-footer a {
+    color: #ff9800;
+    text-decoration: none;
+  }
+  
+  .auth-footer a:hover {
+    text-decoration: underline;
+  }
+  
+  /* รองรับการแสดงผลบนมือถือ */
+  @media (max-width: 480px) {
+    .auth-container {
+      padding: 1rem;
+      margin: 1rem;
+    }
+  }

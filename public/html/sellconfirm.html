@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ยืนยันการสั่งซื้อ - Coffee Everyday</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/sellconfirm.css">
+</head>
+<body>
+  <div id="notification" class="notification hidden"></div>
+  <div id="loader" class="loader hidden">
+    <div class="spinner"></div>
+  </div>
+
+  <header>
+    <div class="logo">
+      <img src="/images/logo.png" alt="Coffee Everyday Logo">
+      <h1>ยืนยันการสั่งซื้อ</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/home">หน้าหลัก</a></li>
+        <li><a href="/html/sell.html">หน้าขาย</a></li>
+        <li><a href="/html/logout.html" onclick="logout()">ออกจากระบบ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="receipt-container">
+      <div class="receipt-header">
+        <div class="shop-info">
+          <h2>Coffee Everyday</h2>
+          <p>123 ถนนรัชดาภิเษก กรุงเทพมหานคร 10400</p>
+          <p>โทร: 02-123-4567</p>
+        </div>
+        <div class="receipt-details">
+          <div class="receipt-number">
+            <h3>ใบเสร็จรับเงิน</h3>
+            <p>เลขที่: <span id="orderNumber">#000000</span></p>
+          </div>
+          <div class="receipt-date">
+            <p>วันที่: <span id="orderDate">1 เมษายน 2025 12:00</span></p>
+            <p id="customerInfo">ลูกค้า: ทั่วไป</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="receipt-body">
+        <table id="orderDetails">
+          <thead>
+            <tr>
+              <th class="item-number">ลำดับ</th>
+              <th class="item-name">รายการ</th>
+              <th class="item-price">ราคา</th>
+              <th class="item-quantity">จำนวน</th>
+              <th class="item-total">รวม</th>
+            </tr>
+          </thead>
+          <tbody id="orderItemsList">
+            <!-- รายการสินค้าจะแสดงที่นี่ -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="receipt-footer">
+        <div class="summary">
+          <div class="summary-row">
+            <div class="summary-label">ยอดรวม</div>
+            <div id="subtotal" class="summary-value">฿0.00</div>
+          </div>
+          <div id="discountRow" class="summary-row hidden">
+            <div class="summary-label">ส่วนลด</div>
+            <div id="discount" class="summary-value">฿0.00</div>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">ภาษีมูลค่าเพิ่ม (7%)</div>
+            <div id="vat" class="summary-value">฿0.00</div>
+          </div>
+          <div class="summary-row total">
+            <div class="summary-label">ยอดสุทธิ</div>
+            <div id="totalAmount" class="summary-value">฿0.00</div>
+          </div>
+        </div>
+        <div class="payment-info">
+          <p id="paymentMethod">ชำระโดย: เงินสด</p>
+        </div>
+        <div class="thank-you">
+          <p>ขอบคุณที่ใช้บริการ</p>
+          <p>Coffee Everyday</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button id="backBtn" class="secondary-btn">กลับไปหน้าขาย</button>
+      <button id="printBillBtn" class="primary-btn">พิมพ์ใบเสร็จ</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Coffee Everyday | All Rights Reserved</p>
+  </footer>
+
+  <script src="/js/sellconfirm.js"></script>
+</body>
+</html>

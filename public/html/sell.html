@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ขายหน้าร้าน - Coffee Everyday</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/sell.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+          <img src="/images/profile1.webp" alt="Coffee Everyday Logo">
+          <h1>ขายสินค้า - Coffee Everyday</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/html/home.html"><i class="fas fa-home"></i> หน้าหลัก</a></li>
+            <li><a href="/html/sell.html"><i class="fas fa-cash-register"></i> ขายสินค้า</a></li>
+            <li><a href="/html/order_history.html"><i class="fas fa-history"></i> ประวัติการขาย</a></li>
+            <li><a href="/html/login.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></li>
+          </ul>
+        </nav>
+      </header>
+
+  <main>
+    <div class="menu">
+      <h2>เมนูเครื่องดื่ม</h2>
+      <div id="menuList" class="menu-items">
+        <!-- เมนูต่าง ๆ จะถูกเพิ่มจาก JavaScript -->
+      </div>
+    </div>
+
+    <div class="order">
+      <h2>รายการสั่งซื้อ</h2>
+      <table id="orderList">
+        <thead>
+          <tr>
+            <th>หมายเลข</th>
+            <th>สินค้า</th>
+            <th>ราคา</th>
+            <th>จำนวน</th>
+            <th>รวม</th>
+            <th>ลบ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- รายการสั่งซื้อจะถูกเพิ่มจาก JavaScript -->
+        </tbody>
+      </table>
+      <div id="totalPrice">
+        <h3>รวม: ฿<span id="totalAmount">0.00</span></h3>
+      </div>
+      <button id="checkoutBtn">ยืนยันการสั่งซื้อ</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Coffee Everyday | All Rights Reserved</p>
+  </footer>
+
+  <script src="/js/sell.js"></script>
+</body>
+</html>
