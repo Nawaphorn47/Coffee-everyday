@@ -1,4 +1,4 @@
-let menuItems = [];
+let menuItems = []; // ไว้รอรอรับข้อมูลจากหลังบ้าน
 let order = []; // เพิ่มการประกาศตัวแปร order เป็นอาร์เรย์เปล่า
 
 // ฟังก์ชันที่แสดงเมนูบนหน้าเว็บ
@@ -21,15 +21,15 @@ function renderMenu() {
     });
 }
 
-// ฟังก์ชันดึงข้อมูลเมนูจาก API
+// ฟังก์ชันดึงข้อมูลเมนูจาก API 
 async function fetchMenuItems() {
     try {
         const response = await fetch('/api/menu');
         if (!response.ok) {
             throw new Error('ไม่สามารถดึงข้อมูลเมนูได้');
         }
-        menuItems = await response.json();
-        renderMenu();
+        menuItems = await response.json(); // แปลงข้อมูล JSON ที่ได้มาเป็นอาร์เรย์
+        renderMenu(); //renderMenu คือไว้แสดงขึ้นหน้าเว็บ
     } catch (error) {
         console.error('Error fetching menu:', error);
         alert('เกิดข้อผิดพลาดในการโหลดเมนู: ' + error.message);
@@ -42,7 +42,7 @@ async function fetchMenuItems() {
             { id: 4, name: 'Espresso', price: 60, image: '/images/Espresso.jpg' },
             { id: 5, name: 'Cappuccino', price: 50, image: '/images/Cappuccino.jpg' }
         ];
-        renderMenu();
+        renderMenu(); // ก็ใช้ข้อมูลนี้ไปถ้าดึงมาจาก backend ไม่ได้
     }
 }
 

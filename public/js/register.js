@@ -1,4 +1,4 @@
-// ✅ ตัวอย่าง register.js ที่ใช้ได้แน่นอน
+
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const error = document.getElementById('registerError');
