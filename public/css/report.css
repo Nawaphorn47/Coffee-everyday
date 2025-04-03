@@ -58,6 +58,23 @@
     color: #6c757d;
   }
   
+  /* สไตล์สำหรับโลโก้ */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logo img {
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .logo h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
   /* รูปแบบส่วนฟิลเตอร์ */
   .report-filters {
     background-color: #f8f9fa;

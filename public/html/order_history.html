@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>ประวัติการสั่งซื้อ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <title>ประวัติการสั่งซื้อ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="/images/profile1.webp" alt="Coffee Everyday Logo">
-      <h1>ประวัติการขาย - Coffee Everyday</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="/html/home.html"><i class="fas fa-home"></i> หน้าหลัก</a></li>
-        <li><a href="/html/sell.html"><i class="fas fa-cash-register"></i> ขายสินค้า</a></li>
-        <li><a href="/html/order_history.html"><i class="fas fa-history"></i> ประวัติการขาย</a></li>
-        <li><a href="/html/reports.html"><i class="fas fa-chart-line"></i> รายงานสรุปรายได้</a></li>
-        <li><a href="/html/login.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">
+            <img src="/images/profile1.webp" alt="Coffee Everyday Logo">
+            <h1>ประวัติการขาย - Coffee Everyday</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/html/home.html"><i class="fas fa-home"></i> หน้าหลัก</a></li>
+                <li><a href="/html/sell.html"><i class="fas fa-cash-register"></i> ขายสินค้า</a></li>
+                <li><a href="/html/order_history.html"><i class="fas fa-history"></i> ประวัติการขาย</a></li>
+                <li><a href="/html/reports.html"><i class="fas fa-chart-line"></i> รายงานสรุปรายได้</a></li>
+                <li><a href="/html/login.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <table id="orderHistory">
-      <thead>
-        <tr>
-          <th>หมายเลขคำสั่งซื้อ</th>
-          <th>ยอดรวม</th>
-          <th>สถานะ</th>
-          <th>วันที่</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- รายการคำสั่งซื้อจะแสดงที่นี่ -->
-      </tbody>
-    </table>
-  </main>
+    <main>
+        <table id="orderHistory">
+            <thead>
+                <tr>
+                    <th>หมายเลขคำสั่งซื้อ</th>
+                    <th>ยอดรวม</th>
+                    <th>สถานะ</th>
+                    <th>วันที่</th>
+                    <th>รายละเอียด</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </main>
 
-  <script src="/js/order_history.js"></script>
+    <script src="/js/order_history.js"></script>
 </body>
 </html>

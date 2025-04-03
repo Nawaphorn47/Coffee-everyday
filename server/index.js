@@ -125,45 +125,83 @@ app.post('/login', (req, res) => {
 });
 
 // --------------------- ORDER HISTORY --------------------- //
-app.post('/createOrder', (req, res) => {
-    const { user_id, items } = req.body; // ค่าจากหน้าเว็บไซต์ (items คือลิสต์ของสินค้าที่สั่ง)
-    const total_price = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    const sql = `INSERT INTO orders (user_id, total_price, status, payment_status) VALUES (?, ?, 'รอคิว', 'รอการชำระ')`;
-    db.query(sql, [user_id, total_price], (err, result) => {
-        if (err) {
-            return res.status(500).send('Error creating order');
-        }
-
-        const orderId = result.insertId;
-        const orderItems = items.map(item => [
-            orderId, item.menu_item_id, item.quantity, item.price
-        ]);
-        const itemSql = `INSERT INTO order_items (order_id, menu_item_id, quantity, price) VALUES ?`;
-        db.query(itemSql, [orderItems], (err) => {
-            if (err) return res.status(500).send('Error adding order items');
-            res.status(200).send('Order created successfully');
-        });
-    });
-});
-
-app.post('/updateOrderStatus', (req, res) => {
-    const { order_id, status } = req.body;
-
-    const sql = `UPDATE orders SET status = ? WHERE id = ?`;
-    db.query(sql, [status, order_id], (err) => {
-        if (err) return res.status(500).send('Error updating order status');
-        res.status(200).send('Order status updated');
-    });
-});
-
-app.get('/queue', (req, res) => {
-    const sql = `SELECT * FROM queue ORDER BY queue_time ASC`;
+app.get('/api/orders', (req, res) => {
+    const sql = `
+        SELECT o.id, o.total_price, o.status, o.payment_status, o.order_date 
+        FROM orders o
+        ORDER BY o.order_date DESC
+    `;
+    
     db.query(sql, (err, result) => {
-        if (err) return res.status(500).send('Error fetching queue data');
+        if (err) {
+            console.error('Error fetching order history:', err);
+            return res.status(500).send('Error fetching order history');
+        }
         res.json(result);
     });
 });
+
+app.get('/api/orders/:id', (req, res) => {
+    const orderId = req.params.id;
+    
+    // ดึงข้อมูลหลักของคำสั่งซื้อ
+    const orderSql = `
+        SELECT o.id, o.user_id, o.order_date, o.total_price, o.status, o.payment_status
+        FROM orders o
+        WHERE o.id = ?
+    `;
+    
+    // ดึงรายการเมนูในคำสั่งซื้อ
+    const itemsSql = `
+        SELECT oi.quantity, oi.price, mi.name, mi.type
+        FROM order_items oi
+        JOIN menu_items mi ON oi.menu_item_id = mi.id
+        WHERE oi.order_id = ?
+    `;
+    
+    // ดึงข้อมูลการชำระเงิน (ถ้ามี)
+    const paymentSql = `
+        SELECT payment_amount, payment_method, payment_date
+        FROM payment_history
+        WHERE order_id = ?
+    `;
+    
+    db.query(orderSql, [orderId], (err, orderResult) => {
+        if (err) {
+            console.error('Error fetching order:', err);
+            return res.status(500).send('Error fetching order details');
+        }
+        
+        if (orderResult.length === 0) {
+            return res.status(404).send('Order not found');
+        }
+        
+        const order = orderResult[0];
+        
+        // ดึงรายการเมนูในคำสั่งซื้อ
+        db.query(itemsSql, [orderId], (err, itemsResult) => {
+            if (err) {
+                console.error('Error fetching order items:', err);
+                return res.status(500).send('Error fetching order items');
+            }
+            
+            order.items = itemsResult;
+            
+            // ดึงข้อมูลการชำระเงิน
+            db.query(paymentSql, [orderId], (err, paymentResult) => {
+                if (err) {
+                    console.error('Error fetching payment history:', err);
+                    return res.status(500).send('Error fetching payment history');
+                }
+                
+                order.payments = paymentResult;
+                
+                res.json(order);
+            });
+        });
+    });
+});
+// ---------------------- SELL ---------------------- //
 
 app.post('/api/createOrder', (req, res) => {
     console.log('Received order data:', JSON.stringify(req.body, null, 2));

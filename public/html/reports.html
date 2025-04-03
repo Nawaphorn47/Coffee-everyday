@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/reports.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
 <body>
   <header>
@@ -53,43 +52,6 @@
       </div>
     </section>
 
-    <section class="report-filters">
-      <div class="filter-container">
-        <div class="filter-group">
-          <label for="report-type">ประเภทรายงาน:</label>
-          <select id="report-type">
-            <option value="daily">รายวัน</option>
-            <option value="monthly">รายเดือน</option>
-            <option value="yearly">รายปี</option>
-          </select>
-        </div>
-        
-        <div class="filter-group">
-          <label for="date-range">ช่วงเวลา:</label>
-          <select id="date-range">
-            <option value="current">ปัจจุบัน</option>
-            <option value="last-7">7 วันที่ผ่านมา</option>
-            <option value="last-30">30 วันที่ผ่านมา</option>
-            <option value="custom">กำหนดเอง</option>
-          </select>
-        </div>
-        
-        <div class="date-inputs" id="custom-dates">
-          <div class="filter-group">
-            <label for="start-date">วันที่เริ่มต้น:</label>
-            <input type="date" id="start-date">
-          </div>
-          <div class="filter-group">
-            <label for="end-date">วันที่สิ้นสุด:</label>
-            <input type="date" id="end-date">
-          </div>
-        </div>
-        
-        <button id="generate-report" class="btn-primary">
-          <i class="fas fa-chart-bar"></i> สร้างรายงาน
-        </button>
-      </div>
-    </section>
 
     <section class="charts">
       <div class="chart-container">
@@ -102,38 +64,7 @@
         <canvas id="top-products-chart"></canvas>
       </div>
     </section>
-
-    <section class="data-table">
-      <h3>ข้อมูลรายได้ตามช่วงเวลา</h3>
-      <div class="table-container">
-        <table id="income-table">
-          <thead>
-            <tr>
-              <th>วันที่</th>
-              <th>จำนวนออเดอร์</th>
-              <th>รายได้รวม</th>
-              <th>รายได้เฉลี่ยต่อออเดอร์</th>
-              <th>เทียบกับช่วงก่อนหน้า</th>
-            </tr>
-          </thead>
-          <tbody id="income-data">
-            <!-- ข้อมูลจะถูกเพิ่มด้วย JavaScript -->
-          </tbody>
-        </table>
-      </div>
-      
-      <div class="export-buttons">
-        <button id="export-excel" class="btn-secondary">
-          <i class="fas fa-file-excel"></i> ส่งออก Excel
-        </button>
-        <button id="export-pdf" class="btn-secondary">
-          <i class="fas fa-file-pdf"></i> ส่งออก PDF
-        </button>
-        <button id="print-report" class="btn-secondary">
-          <i class="fas fa-print"></i> พิมพ์รายงาน
-        </button>
-      </div>
-    </section>
+    
   </main>
 
   <footer>
